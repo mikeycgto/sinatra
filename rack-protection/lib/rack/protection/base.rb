@@ -9,9 +9,8 @@ module Rack
     class Base
       DEFAULT_OPTIONS = {
         :reaction    => :default_reaction, :logging   => true,
-        :message     => 'Forbidden',       :encryptor => Digest::SHA1,
-        :session_key => 'rack.session',    :status    => 403,
-        :allow_empty_referrer => true,
+        :message     => 'Forbidden',       :session_key => 'rack.session',
+        :status      => 403,               :allow_empty_referrer => true,
         :report_key           => "protection.failed",
         :html_types           => %w[text/html application/xhtml]
       }
@@ -105,10 +104,6 @@ module Rack
         secure ? SecureRandom.hex(16) : "%032x" % rand(2**128-1)
       rescue NotImplementedError
         random_string false
-      end
-
-      def encrypt(value)
-        options[:encryptor].hexdigest value.to_s
       end
 
       def secure_compare(a, b)

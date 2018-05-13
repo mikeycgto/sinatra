@@ -28,7 +28,7 @@ module Rack
       use_these = Array options[:use]
 
       if options.fetch(:without_session, false)
-        except += [:session_hijacking, :remote_token]
+        except += %i[session_hijacking remote_token]
       end
 
       Rack::Builder.new do

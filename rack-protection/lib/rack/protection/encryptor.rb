@@ -15,7 +15,7 @@ module Rack
       end
 
       def self.encrypt_message(data, secret, auth_data = '')
-        raise ArgumentError, "data cannot be nil" if data.nil?
+        raise ArgumentError, 'data cannot be nil' if data.nil?
 
         cipher = OpenSSL::Cipher.new(CIPHER)
         cipher.encrypt
@@ -52,7 +52,6 @@ module Rack
         decrypted_data = cipher.update(cipher_text)
         decrypted_data << cipher.final
         decrypted_data
-
       rescue OpenSSL::Cipher::CipherError, TypeError, ArgumentError
         nil
       end
